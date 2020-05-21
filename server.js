@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const auth = require('./routes/auth');
 const connectDB = require('./config/db');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
 
@@ -23,6 +24,9 @@ app.use(express.json());
 
 // Cookie parser
 app.use(cookieParser());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount routes
 app.use('/api/v1/auth', auth);
